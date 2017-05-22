@@ -9,9 +9,8 @@ import { list } from 'react-immutable-proptypes'
 import { bool, string, array, object, func } from 'prop-types'
 import ReactDataGrid from 'react-data-grid'
 import { Data } from 'react-data-grid-addons'
-import { ReactDataGridSelection, ReactDataGridFiltering, ReactDataGridSorting } from '../../../higher-order-components'
+import { ReactDataGridSelection, ReactDataGridFiltering, ReactDataGridSorting, getColDef } from 'react-data-grid-hocs'
 import { SID, FIRST_NAME, LAST_NAME, COUNTRY_NAME } from '../../../constants/global'
-import { areArraysEqual } from '../../../utils/utils'
 import { getColDef } from '../../ReactDataGrid'
 
 const { Selectors } = Data
