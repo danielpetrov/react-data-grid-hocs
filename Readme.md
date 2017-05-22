@@ -16,7 +16,7 @@ import { getColDef } from '../../ReactDataGrid'
 
 const { Selectors } = Data
 
-const getReportDetailsColumns = options => [
+const getColumns = options => [
     getColDef({
         key: SID,
         title: 'SID',
@@ -76,7 +76,7 @@ export class _Table extends Component {
 
         return (
             <ReactDataGrid
-                columns={getReportDetailsColumns({
+                columns={getColumns({
                     onFilterChange,
                     sortable: true,
                     filterable: true,
