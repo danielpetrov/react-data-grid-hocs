@@ -12,7 +12,7 @@ export const ReactDataGridSorting = DecoratedComponent => {
         }
 
         onGridSort = (sortColumn, sortDirection) => {
-            this.setState({ sortColumn: sortColumn, sortDirection: sortDirection })
+            this.setState({ sortColumn, sortDirection })
         }
 
         render() {

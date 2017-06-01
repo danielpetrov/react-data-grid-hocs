@@ -51,6 +51,10 @@ export const ReactDataGridSelection = (DecoratedComponent, options = DEFAULT_OPT
             this.setState({ selectedKeys: newSelectedKeys })
         }
 
+        setSelectedKeys = selectedKeys => {
+            this.setState({ selectedKeys })
+        }
+
         render() {
             const { selectedKeys } = this.state
 
@@ -60,6 +64,7 @@ export const ReactDataGridSelection = (DecoratedComponent, options = DEFAULT_OPT
                     selectedKeys={selectedKeys}
                     onRowsSelected={this.onRowsSelected}
                     onRowsDeselected={this.onRowsDeselected}
+                    setSelectedKeys={this.setSelectedKeys}
                 />
             )
         }
