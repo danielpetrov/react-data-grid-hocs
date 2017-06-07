@@ -10,14 +10,12 @@ export class FilterableHeaderCell extends Component {
         }
     }
 
-    onChange = (e) => {
-        const { target: { value: filterTerm } } = e
+    onChange = ({ target: { value: filterTerm } }) => {
         const { columnKey, onChange } = this.props
-
-        e.stopPropagation()
 
         this.setState({ filterTerm })
         onChange({ filterTerm, column: { key: columnKey } })
+        setTimeout(() => { this.inputRef.focus() }, 0)
     }
 
     render() {
@@ -25,17 +23,20 @@ export class FilterableHeaderCell extends Component {
         const { columnKey } = this.props
 
         return (
-            <input
-                style={{ marginTop: '5px' }}
-                key={`header-filter-${columnKey}`}
-                type="text"
-                className="form-control input-md"
-                placeholder="Search"
-                value={filterTerm}
-                onChange={this.onChange}
-                onClick={e => e.stopPropagation()}
-                onKeyDown={e => e.stopPropagation()}
-            />
+            <div>
+                <div className="form-group" style={{ padding: '5px 0 0 0', marginBottom: 0 }}>
+                    <input
+                        key={`header-filter-${columnKey}`}
+                        ref={input => { this.inputRef = input }}
+                        type="text"
+                        className="form-control input-md"
+                        placeholder="Search"
+                        value={filterTerm}
+                        onChange={this.onChange}
+                        onClick={e => e.stopPropagation()}
+                    />
+                </div>
+            </div>
         )
     }
 }
