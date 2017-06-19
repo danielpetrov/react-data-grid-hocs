@@ -2,12 +2,12 @@ import React from 'react'
 import { FilterableHeaderCell } from './components/FilterableHeaderCell'
 import { string, func } from 'prop-types'
 
-export const renderFilterableHeaderCell = ({ columnKey, title, onFilterChange, CustomFilterComponent }) => (
+export const SubHeaderCell = ({ columnKey, title, onFilterChange, CustomFilterComponent }) => (
     <div>
         <div>{title}</div>
         {
             CustomFilterComponent != null ?
-                <CustomFilterComponent />
+                <CustomFilterComponent columnKey={columnKey} onFilterChange={onFilterChange} />
                 : null
         }
         {
@@ -18,7 +18,7 @@ export const renderFilterableHeaderCell = ({ columnKey, title, onFilterChange, C
     </div>
 )
 
-renderFilterableHeaderCell.propTypes = {
+SubHeaderCell.propTypes = {
     columnKey: string.isRequired,
     title: string.isRequired,
     onFilterChange: func.isRequired
@@ -27,19 +27,11 @@ renderFilterableHeaderCell.propTypes = {
 export const getColDef = options => {
     if (options.filterable) {
         return {
-            name: renderFilterableHeaderCell({
+            name: SubHeaderCell({
                 title: options.title,
                 columnKey: options.key,
-                onFilterChange: options.onFilterChange
-            }),
-            ...options
-        }
-    } else if (options.customFilterComponent != null) {
-        return {
-            name: renderFilterableHeaderCell({
-                title: options.title,
-                columnKey: options.key,
-                onFilterChange: options.onFilterChange
+                onFilterChange: options.onFilterChange,
+                ...options
             }),
             ...options
         }
