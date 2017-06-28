@@ -1,4 +1,5 @@
 import React, { PureComponent as Component } from 'react'
+import { checkIfImmutableCollection } from '../utils'
 
 const DEFAULT_OPTIONS = {
     key: 'id',
@@ -16,6 +17,18 @@ const areArraysEqual = (arr1, arr2) => {
     }
 
     return true
+}
+
+const getRowsKeys = ({ rows, options }) => {
+    if (checkIfImmutableCollection(rows)) {
+        return rows.reduce((acc, r) => {
+            acc.push(r.getIn(['row', options.key]))
+
+            return acc
+        }, [])
+    } else {
+        return rows.map(r => r.row[options.key])
+    }
 }
 
 export const ReactDataGridSelection = (DecoratedComponent, options = DEFAULT_OPTIONS) => {
@@ -38,15 +51,14 @@ export const ReactDataGridSelection = (DecoratedComponent, options = DEFAULT_OPT
 
         onRowsSelected = rows => {
             const { selectedKeys } = this.state
-            const newSelectedKeys = selectedKeys.concat(rows.map(r => r.row[options.key]))
 
-            this.setState({ selectedKeys: newSelectedKeys })
+            this.setState({ selectedKeys: selectedKeys.concat(getRowsKeys({ rows, options })) })
         }
 
         onRowsDeselected = rows => {
             const { selectedKeys } = this.state
-            const rowIndexes = rows.map(r => r.row[options.key])
-            const newSelectedKeys = selectedKeys.filter(i => rowIndexes.indexOf(i) === -1)
+            const deselectedRowsKeys = getRowsKeys({ rows, options })
+            const newSelectedKeys = selectedKeys.filter(i => deselectedRowsKeys.indexOf(i) === -1)
 
             this.setState({ selectedKeys: newSelectedKeys })
         }
