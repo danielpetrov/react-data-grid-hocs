@@ -1,5 +1,5 @@
 import React, { PureComponent as Component } from 'react'
-import { checkIfImmutableCollection } from '../utils'
+import { isImmutableCollection } from '../utils'
 
 const DEFAULT_OPTIONS = {
     key: 'id',
@@ -20,14 +20,20 @@ const areArraysEqual = (arr1, arr2) => {
 }
 
 const getRowsKeys = ({ rows, options }) => {
-    if (checkIfImmutableCollection(rows)) {
+    if (isImmutableCollection(rows)) {
         return rows.reduce((acc, r) => {
             acc.push(r.getIn(['row', options.key]))
 
             return acc
         }, [])
     } else {
-        return rows.map(r => r.row[options.key])
+        return rows.map(({ row }) => {
+            if(isImmutableCollection(row)) {
+                return row.get(options.key)
+            }
+
+            return row[options.key]
+        })
     }
 }
 
