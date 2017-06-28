@@ -44,7 +44,7 @@ export const ReactDataGridSelection = (DecoratedComponent, options = DEFAULT_OPT
         componentWillReceiveProps(nextProps, { selectedKeys: newSelectedKeys }) {
             const { selectedKeys } = this.state
 
-            if (options.onSelectedKeysChangeCallback !== null && areArraysEqual(selectedKeys, newSelectedKeys)) {
+            if (options.onSelectedKeysChangeCallback != null && areArraysEqual(selectedKeys, newSelectedKeys)) {
                 options.onSelectedKeysChangeCallback(newSelectedKeys)
             }
         }
