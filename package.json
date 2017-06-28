@@ -1,6 +1,6 @@
 {
   "name": "react-data-grid-hocs",
-  "version": "0.2",
+  "version": "0.2.1",
   "description": "Helper utility for ReactDataGrid",
   "main": "dist/index.js",
   "scripts": {
