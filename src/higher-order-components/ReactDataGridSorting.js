@@ -1,13 +1,16 @@
 import React, { PureComponent as Component } from 'react'
 
-export const ReactDataGridSorting = DecoratedComponent => {
+export const ReactDataGridSorting = (DecoratedComponent, options = {
+    defaultSortColumn: null,
+    defaultSortDirection: null
+} = {}) => {
     class ReactDataGridSorting extends Component {
         constructor() {
             super()
 
             this.state = {
-                sortColumn: null,
-                sortDirection: null
+                sortColumn: options.defaultSortColumn,
+                sortDirection: options.defaultSortDirection
             }
         }
 
@@ -17,6 +20,7 @@ export const ReactDataGridSorting = DecoratedComponent => {
 
         render() {
             const { sortColumn, sortDirection } = this.state
+
 
             return (
                 <DecoratedComponent
