@@ -3,7 +3,7 @@ import React, { PureComponent as Component } from 'react'
 export const ReactDataGridSorting = (DecoratedComponent, options = {
     defaultSortColumn: null,
     defaultSortDirection: null
-} = {}) => {
+}) => {
     class ReactDataGridSorting extends Component {
         constructor() {
             super()

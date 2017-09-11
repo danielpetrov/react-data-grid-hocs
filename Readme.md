@@ -128,7 +128,11 @@ _Table.propTypes = {
 
 export const ReportDetailsTable = ReactDataGridFiltering(
     ReactDataGridSorting(
-        ReactDataGridSelection(_ReportDetailsTable)
+        ReactDataGridSelection(_ReportDetailsTable),
+        {
+            defaultSortingColumn: 'abc',
+            defaultSortingDirection: 'ASC'
+        }
     )
 )
 
